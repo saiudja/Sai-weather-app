@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather App</title>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sono:wght@200;400&display=swap"
+      rel="stylesheet"
+    />
+    <link href="src/style.css" rel="stylesheet" type="text/css" />
+    <script
+      src="https://kit.fontawesome.com/5d487f9432.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>
+      Weather App
+      <i class="fa-regular fa-sun"></i>
+    </h1>
+
+    <div class="container">
+      <form id="city-input">
+        <input
+          type="text"
+          placeholder="Enter your city"
+          autofocus="on"
+          autocomplete="off"
+          id="city-tape-on"
+        />
+        <input
+          type="submit"
+          value="Search"
+          class="btn btn-warning"
+          id="search-button"
+        />
+        <input
+          type="submit"
+          value="Currently"
+          class="btn btn-info"
+          id="currently-button"
+        />
+      </form>
+      <ul>
+        <li id="current-city"></li>
+        <li id="current-date"></li>
+        <li id="current-weather"></li>
+      </ul>
+      <div class="row justify-content-start">
+        <div class="col-3" id="temp-now"></div>
+        <div class="col-3">
+          <ul class="weather">
+            <li id="humidity"></li>
+            <li id="wind"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div>
+      <a
+        href="https://github.com/saiudja/wether-app"
+        target="_blank"
+        class="see-more"
+        >Open source code
+      </a>
+      by Olena Baranova
+    </div>
+    <script src="src/index.js"></script>
+  </body>
+</html>

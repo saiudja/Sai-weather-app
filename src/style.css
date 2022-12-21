@@ -1,0 +1,54 @@
+body {
+  font-family: "Roboto", sans-serif;
+  padding: 0 20px;
+}
+.container {
+  background: #f6f6f6;
+  border: 1px solid #dadde1;
+  padding: 15px;
+  margin: 20px auto;
+  border-radius: 10px;
+  max-width: 600px;
+}
+
+.btn.btn-info {
+  background-color: #31d2f2;
+  border: none;
+  color: black;
+}
+
+h1 {
+  color: #31d2f2;
+  text-align: center;
+  font-weight: 900;
+  margin: 0;
+  font-size: 34px;
+  line-height: 48px;
+}
+ul {
+  font-weight: 600;
+  list-style-type: none;
+  padding: 0;
+}
+
+#temp-now {
+  font-size: 38px;
+  color: #31d2f2;
+  font-weight: 800;
+}
+#current-city {
+  font-size: 30px;
+}
+#current-weather {
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.weather {
+  font-weight: 400;
+}
+
+form {
+  margin: 20px 0;
+}

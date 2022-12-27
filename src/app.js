@@ -22,7 +22,7 @@ function showTemp(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
-
+displayForecast();
 function search(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#city-tape-on");
@@ -96,4 +96,25 @@ function formatDate(timestamp) {
   ];
   let day = days[date.getDay()];
   return `${day} ${hours}:${minutes}`;
+}
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let forecastHTML = `<div class="row">`;
+
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `   <div class="col-2">
+          <div class="weather-forecast-date">${day}</div>
+          <img srs="" alt="" width="42" />
+          <div class="weather-forecast-temperature">
+            <span class="weather-forecast-temperature-max">18°</span>
+            <span class="weather-forecast-temperature-min">12°</span>
+        </div>
+    </div>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }

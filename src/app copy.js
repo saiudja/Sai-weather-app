@@ -20,10 +20,8 @@ function showTemp(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
-
-  getForecast(response.data.coord);
+  //getForecast(response.data.coord);
 }
-
 function search(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#city-tape-on");
@@ -39,31 +37,30 @@ function search(event) {
 let cityCurrent = document.querySelector("#search-button");
 cityCurrent.addEventListener("click", search);
 
-// function retrievePosition(position) {
-//   let apiKey = "0253ff28a88d857c4ea41ede9adb9d05";
-//   let lat = position.coords.latitude;
-//   let lon = position.coords.longitude;
-//   console.log(position);
-//   let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
-//   axios.get(url).then(showTemp);
-// }
+function retrievePosition(position) {
+  let apiKey = "0253ff28a88d857c4ea41ede9adb9d05";
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  console.log(position);
+  let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+  axios.get(url).then(showTemp);
+}
 
-// let currentlyTemp = document.querySelector("#currently-button");
-// currentlyTemp.addEventListener(
-//   "click",
-//   navigator.geolocation.getCurrentPosition(retrievePosition)
-// );
+let currentlyTemp = document.querySelector("#currently-button");
+currentlyTemp.addEventListener(
+  "click",
+  navigator.geolocation.getCurrentPosition(retrievePosition)
+);
 
 function getForecast(coordinates) {
   console.log(coordinates);
-  let apiKey = "0b0aa4233t7a9bf9o9129af4333d0f37";
+  let apiKey = "0253ff28a88d857c4ea41ede9adb9d05";
   let lat = coordinates.lat;
   let lon = coordinates.lon;
-  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
-  console.log(apiUrl);
+  let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
-
+getForecast();
 function convertToFahrenheit(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temp-now");
@@ -72,6 +69,7 @@ function convertToFahrenheit(event) {
   let fahrenheittemperature = (celciumTemperature * 9) / 5 + 32;
   temperatureElement.innerHTML = Math.round(fahrenheittemperature);
 }
+
 function convertToCelsius(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temp-now");
@@ -110,39 +108,23 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
-function formatDay(timestamp) {
-  let date = new Date(timestamp * 1000);
-  let day = date.getDay();
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  return days[day];
-}
-
 function displayForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
-
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let forecastHTML = `<div class="row">`;
-  console.log(response);
-  forecast.forEach(function (forecastDay, index) {
-    if (index < 6) {
-      forecastHTML =
-        forecastHTML +
-        `   <div class="col-2">
-          <div class="weather-forecast-date">${formatDay(
-            forecastDay.time
-          )}</div>
-          <img src="${forecastDay.condition.icon_url}" alt="" width="30" />
-       
+  // console.log(response);
+  forecast.forEach(function (forecastDay) {
+    forecastHTML =
+      forecastHTML +
+      `   <div class="col-2">
+          <div class="weather-forecast-date">${forecastDay.dt}</div>
+          <img srs=""http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="42" />
           <div class="weather-forecast-temperature">
-            <span class="weather-forecast-temperature-max">${Math.round(
-              forecastDay.temperature.maximum
-            )}°</span>
-            <span class="weather-forecast-temperature-min">${Math.round(
-              forecastDay.temperature.minimum
-            )}°</span>
+            <span class="weather-forecast-temperature-max">${forecastDay.temp.max}°</span>
+            <span class="weather-forecast-temperature-min">${forecastDay.temp.min}°</span>
         </div>
     </div>`;
-    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;

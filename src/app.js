@@ -2,7 +2,6 @@ function showTemp(response) {
   celciumTemperature = response.data.main.temp;
   let currentTemp = document.querySelector("#temp-now");
   currentTemp.innerHTML = `${Math.round(celciumTemperature)}`;
-  console.log(response);
 
   let cityName = document.querySelector("#current-city");
   cityName.innerHTML = `${response.data.name}`;
@@ -39,53 +38,50 @@ function search(event) {
 let cityCurrent = document.querySelector("#search-button");
 cityCurrent.addEventListener("click", search);
 
-// function retrievePosition(position) {
-//   let apiKey = "0253ff28a88d857c4ea41ede9adb9d05";
-//   let lat = position.coords.latitude;
-//   let lon = position.coords.longitude;
-//   console.log(position);
-//   let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
-//   axios.get(url).then(showTemp);
-// }
+function retrievePosition(position) {
+  let apiKey = "0253ff28a88d857c4ea41ede9adb9d05";
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+  axios.get(url).then(showTemp);
+}
 
-// let currentlyTemp = document.querySelector("#currently-button");
-// currentlyTemp.addEventListener(
-//   "click",
-//   navigator.geolocation.getCurrentPosition(retrievePosition)
-// );
+let currentlyTemp = document.querySelector("#currently-button");
+currentlyTemp.addEventListener(
+  "click",
+  navigator.geolocation.getCurrentPosition(retrievePosition)
+);
 
 function getForecast(coordinates) {
-  console.log(coordinates);
   let apiKey = "0b0aa4233t7a9bf9o9129af4333d0f37";
   let lat = coordinates.lat;
   let lon = coordinates.lon;
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
-  console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
 }
 
-function convertToFahrenheit(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temp-now");
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-  let fahrenheittemperature = (celciumTemperature * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahrenheittemperature);
-}
-function convertToCelsius(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temp-now");
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
-  temperatureElement.innerHTML = Math.round(celciumTemperature);
-}
+// function convertToFahrenheit(event) {
+//   event.preventDefault();
+//   let temperatureElement = document.querySelector("#temp-now");
+//   celsiusLink.classList.remove("active");
+//   fahrenheitLink.classList.add("active");
+//   let fahrenheittemperature = (celciumTemperature * 9) / 5 + 32;
+//   temperatureElement.innerHTML = Math.round(fahrenheittemperature);
+// }
+// function convertToCelsius(event) {
+//   event.preventDefault();
+//   let temperatureElement = document.querySelector("#temp-now");
+//   celsiusLink.classList.add("active");
+//   fahrenheitLink.classList.remove("active");
+//   temperatureElement.innerHTML = Math.round(celciumTemperature);
+// }
 
-let celciumTemperature = null;
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", convertToFahrenheit);
+// let celciumTemperature = null;
+// let fahrenheitLink = document.querySelector("#fahrenheit-link");
+// fahrenheitLink.addEventListener("click", convertToFahrenheit);
 
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", convertToCelsius);
+// let celsiusLink = document.querySelector("#celsius-link");
+// celsiusLink.addEventListener("click", convertToCelsius);
 
 function formatDate(timestamp) {
   let date = new Date(timestamp);
@@ -122,7 +118,6 @@ function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
-  console.log(response);
   forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
       forecastHTML =

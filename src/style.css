@@ -91,7 +91,6 @@ li::first-letter {
   position: relative;
   top: -28px;
   font-size: 12px;
-  color: #d59bf6;
   text-decoration: none;
 }
 a {
@@ -102,13 +101,13 @@ a:hover {
   cursor: default;
   text-decoration: none;
 }
-.weather-temperature .active {
+/* .weather-temperature .active {
   color: #5e5e8c;
   cursor: default;
 }
 .weather-temperature .active:hover {
   text-decoration: none;
-}
+} */
 #current-city {
   font-size: 30px;
 }
